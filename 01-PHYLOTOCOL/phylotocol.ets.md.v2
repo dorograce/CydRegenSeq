@@ -1,0 +1,64 @@
+# <TITLE>
+ Principal Investigator: Dorothy Mitchell, Allison Edgar, Joseph Ryan, Mark Martindale
+ Draft or Version Number: v.2
+ Date: 3-21-23
+
+## SUMMARY OF CHANGES FROM PREVIOUS VERSION
+\<affected section> \<summary of revisions made> \<rationale>
+
+## 1 INTRODUCTION: BACKGROUND INFORMATION AND SCIENTIFIC RATIONALE  
+
+### 1.1 _OBJECTIVE_  
+
+Goal is to classify Mnemiopsis ETS domain containing proteins
+
+## 2 STUDY DESIGN AND ENDPOINTS  
+
+#### 2.1 <step 1>
+
+use ETS domain from pfam to pull out bzip proteins from ML2.2, Drosophila melanogaster, Nematostella vectensis, and Homo sapiens using hmm2aln.pl
+
+#### 2.2 <step 2>
+
+produce an alignment of residues that match the hmm
+
+```hmm2aln.pl -hmm=PF00170.hmm --name=bzip_1 --fasta_dir=../01-AA_SEQS --threads=45 --no_clean --nofillcnf=nofill.bzip_1.conf
+
+#### 2.3 <step 2>
+
+generate a maximum likelihood tree
+
+```iqtree-omp -s [infile.mafft-gb] -nt AUTO -bb 1000 -m TEST -pre [output prefix] > iq.out 2> iq.err```
+
+
+## 3 WORK COMPLETED SO FAR WITH DATES  
+
+21 March 2023 - we ran hmm2aln.pl and realized that 2 gene models (ML46087a and ML46088a) were problematic. See appendix for the change made.
+\<day month year> \<steps above that have been completed>
+
+## 4 LITERATURE REFERENCED  
+
+\<literature>
+
+## APPENDIX
+
+Version&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;Date&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Significant Revisions  
+2.0 We replaced ML46087a with ML46087a_edited to include missing sequence from the 5' end of the gene model We replaced ML46088a with ML46088a_edited to include missing sequence from the 3' end of the gene model`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

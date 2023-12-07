@@ -1,7 +1,7 @@
-# Commands used in Mitchell et al. - Mnemiopsis regeneration 
+# Commands used in Mitchell et al. - Mnemiopsis cydippid  regeneration 
 #### 1\. Run trimmomatic on all FASTQ files ($f = the prefix of the file followed by "_R1_001.fastq.gz")
 
-`trimmomatic PE -basein ${f} -baseout ${f}trimmed LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:6`
+`trimmomatic PE -basein ${f} -baseout ${f}trimmed LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36`
 
 #### 2\. Run RSEM with bowtie2 on trimmed reads to estimate counts. ($f = the prefix of the file followed by "_R1_001.fastq.gz")
 

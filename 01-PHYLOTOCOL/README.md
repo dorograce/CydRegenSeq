@@ -14,3 +14,5 @@ Original phylotocol for the ETS phylogenetic analysis. This document was origina
 
 An updated phylotocol for the ETS phylogenetic analysis that includes a note on how we substituted the ML2.2 gene model, with a manually edited version that includes sequence that was missing from the 2.2 model. This document was originally created March 21, 2023.
 
+Edit 
+

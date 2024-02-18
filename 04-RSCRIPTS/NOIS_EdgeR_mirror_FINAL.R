@@ -7,18 +7,13 @@
 ##Platform: x86_64-apple-darwin17.0 (64-bit)
 
 
-#Heatmap.2 visualization of Genes -- hierarchically cluster genes in the 3 program overlap list (396), visualize genes expression clusters with a heatmap,
-#visualize each cluster using a multi-line graph, and run gene ontology analysis on the 3 program overlap list and each respective cluster from the hclust)    
-
-## TPMS = Transcripts per million 
-
 #####################
 library(ggplot2)
 
 ## EDGE R 
 ED_DEG <- data.frame( 
   Time_Interval = rep(c('U-00','00-01','01-03','03-06','06-12','12-24','24-48'), each = 2),
-  DEG_count = c(27,0,38,-4,63,-175,127,-120,4,-1,0,0,2,-1),
+  DEG_count = c(30,0,25,-3,25,-39,129,-115,5,-3,0,0,7,-2),
   Direction = rep(c("up","down"),7))
   
 ggplot(ED_DEG, aes(x = Time_Interval, y = DEG_count))+
@@ -28,18 +23,18 @@ ggplot(ED_DEG, aes(x = Time_Interval, y = DEG_count))+
 scale_y_continuous(breaks = seq(-300,300, by=20))
 
 
-#NOISEQBIO  
+#NOISEQ  
 NOIS_DEG <- data.frame( 
   Time_Interval = rep(c('U-00','00-01','01-03','03-06','06-12','12-24','24-48'), each = 2),
-  NOIS_DEG_count = c(36,-34,34,-26,1561,-1257,3699,-2223,99,-69,45,-67,127,-119),
+  NOIS_DEG_count = c(91,-57,50,-16,94,-340,3843,-2223,58,-79,45,-78,108,-62),
   Direction = rep(c("up","down"),7))
 
 ggplot(NOIS_DEG, aes(x = Time_Interval, y = NOIS_DEG_count))+
   geom_col(aes(fill = Direction) )+
   theme_classic()+
   scale_x_discrete(limits=NOIS_DEG$Time_Interval)+
-  scale_y_continuous(limits = c(-5000,5000), breaks = seq(-5000,5000, by=500 ))+
+  scale_y_continuous(limits = c(-4000,4000), breaks = seq(-4000,4000, by=500 ))+
   scale_fill_discrete(breaks=c("up", "down"))
   
 
- =
+

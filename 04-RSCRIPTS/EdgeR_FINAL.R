@@ -2,9 +2,10 @@
 ### Mapping with Bowtie2 Quantification with RSEM -- on Trimmed Reads ## 
 ## CydRegenSeq ## 
 
-## R version 4.1.2 (2021-11-01) -- "Bird Hippie"
-#Copyright (C) 2021 The R Foundation for Statistical Computing
-#Platform: x86_64-apple-darwin17.0 (64-bit)
+#R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+#Copyright (C) 2023 The R Foundation for Statistical Computing
+#Platform: x86_64-apple-darwin20 (64-bit)
+
 
 ## EC = expected count 
 
@@ -19,129 +20,114 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
 BiocManager::install("edgeR")
 library(edgeR)
-## version : 3.36.0 
+sessionInfo()
+## version : 3.42.4 
 
 # Loading gene quantification results # 
 ## Expected count is needed for edgeR
 
 # Uncut Replicate 1 #
-unct_i_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/uncut-i-rep1_S21_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+unct_i_Rp1_B2_Trm<-read.delim("03-RSEM/uncut-i-rep1_S21.RSEM.genes.results")
 unct_i_Rp1_B2_Trm
 
 
 # Uncut Replicate 2 # 
-unct_i_Rp2_B2_Trm <-read.delim("../03-DATA_FILES/uncut-i-rep2_S22_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+unct_i_Rp2_B2_Trm <-read.delim("03-RSEM/uncut-i-rep2_S22.RSEM.genes.results")
 unct_i_Rp2_B2_Trm
 
 
 # Uncut Replicate 3 # 
-unct_i_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/uncut-i-rep3_S23_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+unct_i_Rp3_B2_Trm<-read.delim("03-RSEM/uncut-i-rep3_S23.RSEM.genes.results")
 unct_i_Rp3_B2_Trm
 
-# Uncut Replicate 3 ii # 
-unct_ii_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/uncut-ii-rep3_S24_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
-unct_ii_Rp3_B2_Trm
 
 # 0Hab Replicate 1 #
-hab0_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/0hab-rep1_S25_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab0_Rp1_B2_Trm<-read.delim("03-RSEM/0hab-rep1_S25.RSEM.genes.results")
 hab0_Rp1_B2_Trm
 
 # 0Hab Replicate 2 # 
-hab0_Rp2_B2_Trm<-read.delim("../03-DATA_FILES/0hab-rep2_S26_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab0_Rp2_B2_Trm<-read.delim("03-RSEM/0hab-rep2_S26.RSEM.genes.results")
 hab0_Rp2_B2_Trm
 
 # 0Hab Replicate 3 # 
-hab0_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/0hab-rep3_S27_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab0_Rp3_B2_Trm<-read.delim("03-RSEM/0hab-rep3_S27.RSEM.genes.results")
 hab0_Rp3_B2_Trm
 
 # 1Hab Replicate 1 # 
-hab1_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/1hab-rep3_S30_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab1_Rp1_B2_Trm<-read.delim("03-RSEM/1hab-rep1_S28.RSEM.genes.results")
 hab1_Rp1_B2_Trm
 
 # 1Hab Replicate 2 # 
-hab1_Rp2_B2_Trm <- read.delim("../03-DATA_FILES/1hab-rep2_S29_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab1_Rp2_B2_Trm <- read.delim("03-RSEM/1hab-rep2_S29.RSEM.genes.results")
 hab1_Rp2_B2_Trm
 
 # 1Hab Replicate 3 # 
-hab1_Rp3_B2_Trm <- read.delim("../03-DATA_FILES/1hab-rep3_S30_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab1_Rp3_B2_Trm <- read.delim("03-RSEM/1hab-rep3_S30.RSEM.genes.results")
 hab1_Rp3_B2_Trm
 
 # 3Hab Replicate 1 #
-hab3_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/3hab-rep1_S31_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab3_Rp1_B2_Trm<-read.delim("03-RSEM/3hab-rep1_S31.RSEM.genes.results")
 hab3_Rp1_B2_Trm
 
 # 3Hab Replicate 2 #
-hab3_Rp2_B2_Trm<-read.delim("../03-DATA_FILES/3hab-rep2_S32_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab3_Rp2_B2_Trm<-read.delim("03-RSEM/3hab-rep2_S32.RSEM.genes.results")
 hab3_Rp2_B2_Trm
 
 # 3Hab Replicate 3 # 
-hab3_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/3hab-rep3_S33_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab3_Rp3_B2_Trm<-read.delim("03-RSEM/3hab-rep3_S33.RSEM.genes.results")
 hab3_Rp3_B2_Trm
 
 # 6Hab Replicate 1 #
-hab6_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/6hab-rep1_S34_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab6_Rp1_B2_Trm<-read.delim("03-RSEM/6hab-rep1_S34.RSEM.genes.results")
 hab6_Rp1_B2_Trm
 
 # 6Hab Replicate 2 # 
-hab6_Rp2_B2_Trm<-read.delim("../03-DATA_FILES/6hab-rep2_S35_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab6_Rp2_B2_Trm<-read.delim("03-RSEM/6hab-rep2_S35.RSEM.genes.results")
 hab6_Rp2_B2_Trm
 
 # 6Hab Replicate 3 # 
-hab6_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/6hab-rep3_S36_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab6_Rp3_B2_Trm<-read.delim("03-RSEM/6hab-rep3_S36.RSEM.genes.results")
 hab6_Rp3_B2_Trm
 
 # 12Hab Replicate 1 # 
-hab12_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/12hab-rep1_S37_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab12_Rp1_B2_Trm<-read.delim("03-RSEM/12hab-rep1_S37.RSEM.genes.results")
 hab12_Rp1_B2_Trm
 
 # 12Hab Replicate 2 # 
-hab12_Rp2_B2_Trm<-read.delim("../03-DATA_FILES/12hab-rep2_S38_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab12_Rp2_B2_Trm<-read.delim("03-RSEM/12hab-rep2_S38.RSEM.genes.results")
 hab12_Rp2_B2_Trm
 
 # 12Hab Replicate 3 #
-hab12_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/12hab-rep3_S39_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab12_Rp3_B2_Trm<-read.delim("03-RSEM/12hab-rep3_S39.RSEM.genes.results")
 hab12_Rp3_B2_Trm
 
 # 24Hab Replicate 1 # 
-hab24_i_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/24hab-i-rep1_S40_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab24_i_Rp1_B2_Trm<-read.delim("03-RSEM/24hab-i-rep1_S40.RSEM.genes.results")
 hab24_i_Rp1_B2_Trm
 
 # 24Hab Replicate 2 # 
-hab24_i_Rp2_B2_Trm<-read.delim("../03-DATA_FILES/24hab-i-rep2_S41_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab24_i_Rp2_B2_Trm<-read.delim("03-RSEM/24hab-i-rep2_S41.RSEM.genes.results")
 hab24_i_Rp2_B2_Trm
 
 # 24Hab Replicate 3 #
-hab24_i_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/24hab-i-rep3_S42_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab24_i_Rp3_B2_Trm<-read.delim("03-RSEM/24hab-i-rep3_S42.RSEM.genes.results")
 hab24_i_Rp3_B2_Trm
 
-
-# 24Hab Replicate 3 ii #
-hab24_ii_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/24hab-ii-rep3_S43_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
-hab24_ii_Rp3_B2_Trm
-
 # 48Hab Replicate 1 # 
-hab48_i_Rp1_B2_Trm<-read.delim("../03-DATA_FILES/48hab-i-rep1_S44_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab48_i_Rp1_B2_Trm<-read.delim("03-RSEM/48hab-i-rep1_S44.RSEM.genes.results")
 hab48_i_Rp1_B2_Trm
 
 # 48Hab Replicate 2 # 
-hab48_i_Rp2_B2_Trm<-read.delim("../03-DATA_FILES/48hab-i-rep2_S45_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab48_i_Rp2_B2_Trm<-read.delim("03-RSEM/48hab-i-rep2_S45.RSEM.genes.results")
 hab48_i_Rp2_B2_Trm
 
 # 48Hab Replicate 3 # 
-hab48_i_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/48hab-i-rep3_S46_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
+hab48_i_Rp3_B2_Trm<-read.delim("03-RSEM/48hab-i-rep3_S46.RSEM.genes.results")
 hab48_i_Rp3_B2_Trm
-
-# 48Hab Replicate 3 ii # 
-hab48_ii_Rp3_B2_Trm<-read.delim("../03-DATA_FILES/48hab-ii-rep3_S47_L002_R1_001.fastq.gztrimmed_1PRSEMout.genes.results")
-hab48_ii_Rp3_B2_Trm
-
-
-
-
 
 ## preparing the data 
 
-RSEMcounts_B2_Trm_EC <- data.frame(row.names = hab48_ii_Rp3_B2_Trm$gene_id,
+RSEMcounts_B2_Trm_EC <- data.frame(row.names = hab0_Rp1_B2_Trm$gene_id,
                                     uncut_1=unct_i_Rp1_B2_Trm$expected_count,
                                     uncut_2=unct_i_Rp2_B2_Trm$expected_count,
                                     uncut_3=unct_i_Rp3_B2_Trm$expected_count,
@@ -191,7 +177,7 @@ myedgeR_decide_U00_pval_logFC <- cbind(myedgeR_decide_U00_df,pvaluesedgeR_U00,lo
 ## Getting a list of only significant genes between Uncut and 00hab
 EdgeR_sig_U_00 <- myedgeR_decide_U00[myedgeR_decide_U00[, "hab00-000"] != 0,] #which genes do not equal 0, therefore are significantly down OR upregulated
 EdgeR_names_sig_U_00 <- as.data.frame(EdgeR_sig_U_00)
-length(rownames(EdgeR_names_sig_U_00))# 27 V 3.36.0
+length(rownames(EdgeR_names_sig_U_00))# 30 v3.42.4 
 EdgeR_sig_U_00_pval_logFC <- myedgeR_decide_U00_pval_logFC[myedgeR_decide_U00_pval_logFC[, "hab00-000"] != 0,]
 
 ########################
@@ -217,7 +203,7 @@ EdgeR_sig_00_01 <- myedgeR_decide_00_01[myedgeR_decide_00_01[, "hab01-hab00"] !=
 EdgeR_names_sig_00_01 <- as.data.frame(EdgeR_sig_00_01)
 EdgeR_sig_00_01_pval_logFC <- myedgeR_decide_00_01_pval_logFC[myedgeR_decide_00_01_pval_logFC[, "hab01-hab00"] != 0,]
 EdgeR_names_sig_00_01_pval_logFC <- as.data.frame(EdgeR_sig_00_01_pval_logFC)
-length(EdgeR_names_sig_00_01_pval_logFC$`hab01-hab00`) #42 V.3.36.0
+length(EdgeR_names_sig_00_01_pval_logFC$`hab01-hab00`) #28 v3.42.4 
 
 #comparing 1 with 3 hrs
 RSEMcounts_B2_Trm_0103<- subset(RSEMcounts_B2_Trm_EC, select = c(hab01_1,hab01_2,hab01_3,hab03_1,hab03_2,hab03_3))#only columns of interest from EDGER filtered data ( non normalized) but no technical replicates
@@ -242,7 +228,7 @@ myedgeR_decide_01_03_pval_logFC <- cbind(myedgeR_decide_01_03_df ,pvaluesedgeR_0
 EdgeR_sig_01_03 <- myedgeR_decide_01_03[myedgeR_decide_01_03[, "hab03-hab01"] != 0,]
 EdgeR_names_sig_01_03 <- as.data.frame(EdgeR_sig_01_03)
 EdgeR_sig_01_03_pval_logFC <- myedgeR_decide_01_03_pval_logFC[myedgeR_decide_01_03_pval_logFC[, "hab03-hab01"] != 0,]
-length(EdgeR_sig_01_03_pval_logFC$`hab03-hab01`) # 238  V.3.36.0
+length(EdgeR_sig_01_03_pval_logFC$`hab03-hab01`) # 64  v3.42.4 
 
 
 #comparing 3 with 6 hrs
@@ -268,7 +254,7 @@ myedgeR_decide_03_06_pval_logFC <- cbind(myedgeR_decide_03_06_df,pvaluesedgeR_03
 EdgeR_sig_03_06 <- myedgeR_decide_03_06[myedgeR_decide_03_06[, "hab06-hab03"] != 0,]
 EdgeR_names_sig_03_06 <- as.data.frame(EdgeR_sig_03_06)
 EdgeR_sig_03_06_pval_logFC <- myedgeR_decide_03_06_pval_logFC[myedgeR_decide_03_06_pval_logFC[, "hab06-hab03"] != 0,]
-length(EdgeR_sig_03_06_pval_logFC$`hab06-hab03`) #247 V.3.36.0
+length(EdgeR_sig_03_06_pval_logFC$`hab06-hab03`) #244 v3.42.4 
 
 
 #comparing 6 with 12 hrs
@@ -293,7 +279,7 @@ myedgeR_decide_06_12_pval_logFC <- cbind(myedgeR_decide_06_12_df,pvaluesedgeR_06
 EdgeR_sig_06_12 <- myedgeR_decide_06_12[myedgeR_decide_06_12[, "hab12-hab06"] != 0,]
 EdgeR_names_sig_06_12 <- as.data.frame(EdgeR_sig_06_12)
 EdgeR_sig_06_12_pval_logFC <- myedgeR_decide_06_12_pval_logFC[myedgeR_decide_06_12_pval_logFC[, "hab12-hab06"] != 0,]
-length(EdgeR_sig_06_12_pval_logFC$`hab12-hab06`) #5 V 3.36.0
+length(EdgeR_sig_06_12_pval_logFC$`hab12-hab06`) #8 v3.42.4
 
 
 
@@ -315,7 +301,7 @@ myedgeR_decide_12_24_df <- as.data.frame(myedgeR_decide_12_24)
 
 EdgeR_sig_12_24 <- myedgeR_decide_12_24[myedgeR_decide_12_24[, "hab24-hab12"] != 0,]
 EdgeR_names_sig_12_24 <- as.data.frame(EdgeR_sig_12_24)
-#0 sig genes!! V 3.36.0
+#0 sig genes!! v3.42.4
 
 
 #comparing 24 with 48 hrs
@@ -341,7 +327,7 @@ myedgeR_decide_24_48_pval_logFC <- cbind(myedgeR_decide_24_48_df,pvaluesedgeR_24
 EdgeR_sig_24_48 <- myedgeR_decide_24_48[myedgeR_decide_24_48[, "hab48-hab24"] != 0,]
 EdgeR_names_sig_24_48 <- as.data.frame(EdgeR_sig_24_48)
 EdgeR_sig_24_48_pval_logFC <- myedgeR_decide_24_48_pval_logFC[myedgeR_decide_24_48_pval_logFC[, "hab48-hab24"] != 0,]
-length(EdgeR_sig_24_48_pval_logFC$`hab48-hab24`) #3 V.3.36.0
+length(EdgeR_sig_24_48_pval_logFC$`hab48-hab24`) #9 v3.42.4
 
 
 
@@ -355,10 +341,10 @@ EdgeR_sig_genes_EC_ALL <- list(rownames(EdgeR_names_sig_24_48),
 ## The list of significantly DE across all pairwise time intervals contains replicates, as some genes are DE in more than one time interval
 EdgeR_sig_genes_EC_ALL <- lapply(EdgeR_sig_genes_EC_ALL, function(x) as.matrix(x))
 EdgeR_sig_genes_EC_ALL <- do.call(rbind,EdgeR_sig_genes_EC_ALL)
-length(EdgeR_sig_genes_EC_ALL) #562 V 3.36.0
+length(EdgeR_sig_genes_EC_ALL) #383 v3.42.4
 EdgeR_sig_genes_EC_nodups <- EdgeR_sig_genes_EC_ALL[!duplicated(EdgeR_sig_genes_EC_ALL)]
-length(EdgeR_sig_genes_EC_nodups )#478 V 3.36.0 
-write.csv(EdgeR_sig_genes_EC_nodups,row.names = F,file ="EdgeR_sig_genes_EC_nodups_V3.36.0_V3.csv")
+length(EdgeR_sig_genes_EC_nodups )#348 V 3.42.4 
+write.csv(EdgeR_sig_genes_EC_nodups,row.names = F,file ="EdgeR_sig_v4.csv")
 
 
 #Separate up from down regulation in each pairwise grouping & BLAST
@@ -368,106 +354,161 @@ write.csv(EdgeR_sig_genes_EC_nodups,row.names = F,file ="EdgeR_sig_genes_EC_nodu
 HumRef2020ML <- read.table("HumRef2020ML_eval.txt",header = F)
 HumRef2020ML_df <- as.data.frame(HumRef2020ML, row.names = HumRef2020ML$V1)
 
+# For consensus gene set annotation 
+con_genenames <- read.csv(file="consensus_DE_v4.csv",1) # ML gene names of the genes identified as DE in all three methods
+con_genenames_df <- data.frame(row.names= con_genenames$VNOIS_ED_EB_Set.IntersectionSets...111...,V1 = con_genenames$VNOIS_ED_EB_Set.IntersectionSets...111... )
+
+
 #uncut - 10 mins
 #down
 EdgeR_sig_U_00_pval_logFC
 EdgeR_sig_U_00_down_pval_logFC <- EdgeR_sig_U_00_pval_logFC[EdgeR_sig_U_00_pval_logFC[, "hab00-000"] == -1,]
 length(EdgeR_sig_U_00_down_pval_logFC$`uncut-hab00`) #0
 
-
 #up
 EdgeR_sig_U_00_up_pval_logFC <- EdgeR_sig_U_00_pval_logFC[EdgeR_sig_U_00_pval_logFC[, "hab00-000"] == 1,]
-length(EdgeR_sig_U_00_up_pval_logFC$`hab00-000`) #27
+length(EdgeR_sig_U_00_up_pval_logFC$`hab00-000`) #30
 #BLAST 
 EdgeR_sig_U_00_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_U_00_up_pval_logFC,by='row.names')
 #order P-values 
 EdgeR_sig_U_00_up_pval_logFC_blastp_merge_order<- EdgeR_sig_U_00_up_pval_logFC_blastp_merge[order(EdgeR_sig_U_00_up_pval_logFC_blastp_merge$`myedgeR_U00$table$PValue`, decreasing = F),]
-length(EdgeR_sig_U_00_up_pval_logFC_blastp_merge_order$Row.names) #15
+length(EdgeR_sig_U_00_up_pval_logFC_blastp_merge_order$Row.names) #16
+
+#Consensus UP order
+EdgeR_sig_U_00_up_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_U_00_up_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_U_00_up_pval_logFC_blastp_con_merge_order<- EdgeR_sig_U_00_up_pval_logFC_blastp_con_merge [order(EdgeR_sig_U_00_up_pval_logFC_blastp_con_merge$`myedgeR_U00$table$PValue`, decreasing = F),]
+
 
 # 10 mins - 1 hour
 #down
 EdgeR_sig_00_01_pval_logFC
 EdgeR_sig_00_01_down_pval_logFC <- EdgeR_sig_00_01_pval_logFC[EdgeR_sig_00_01_pval_logFC[, "hab01-hab00"] == -1,]
-length(EdgeR_sig_00_01_down_pval_logFC$`hab01-hab00`) #4
+length(EdgeR_sig_00_01_down_pval_logFC$`hab01-hab00`) #3
 #BLAST
 EdgeR_sig_00_01_down_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_00_01_down_pval_logFC,by='row.names')
 #order P-values 
 EdgeR_sig_00_01_down_pval_logFC_blastp_merge_order<- EdgeR_sig_00_01_down_pval_logFC_blastp_merge[order(EdgeR_sig_00_01_down_pval_logFC_blastp_merge$`myedgeR_00_01$table$PValue`, decreasing = F),]
 length(EdgeR_sig_00_01_down_pval_logFC_blastp_merge_order$Row.names)#2
 
+#Consensus DOWN order
+EdgeR_sig_00_01_down_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_00_01_down_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_00_01_down_pval_logFC_blastp_con_merge_order <- EdgeR_sig_00_01_down_pval_logFC_blastp_con_merge[order(EdgeR_sig_00_01_down_pval_logFC_blastp_con_merge$`myedgeR_00_01$table$PValue`, decreasing = F),]
+
+
 #up
 EdgeR_sig_00_01_up_pval_logFC <- EdgeR_sig_00_01_pval_logFC[EdgeR_sig_00_01_pval_logFC[, "hab01-hab00"] == 1,]
-length(EdgeR_sig_00_01_up_pval_logFC$`hab01-hab00`) #38
+length(EdgeR_sig_00_01_up_pval_logFC$`hab01-hab00`) #25
 
 #BLAST
 EdgeR_sig_00_01_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_00_01_up_pval_logFC,by='row.names')
 #order P-values 
 EdgeR_sig_00_01_up_pval_logFC_blastp_merge_order<- EdgeR_sig_00_01_up_pval_logFC_blastp_merge[order(EdgeR_sig_00_01_up_pval_logFC_blastp_merge$`myedgeR_00_01$table$PValue`, decreasing = F),]
-length(EdgeR_sig_00_01_up_pval_logFC_blastp_merge_order$Row.names)#23
+length(EdgeR_sig_00_01_up_pval_logFC_blastp_merge_order$Row.names)#17
+
+#Consensus UP order
+EdgeR_sig_00_01_up_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_00_01_up_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_00_01_up_pval_logFC_blastp_con_merge_order <- EdgeR_sig_00_01_up_pval_logFC_blastp_con_merge[order(EdgeR_sig_00_01_up_pval_logFC_blastp_con_merge$`myedgeR_00_01$table$PValue`, decreasing = F),]
+
 
 # 1 hour - 3 hours
 #down
 EdgeR_sig_01_03_pval_logFC
 EdgeR_sig_01_03_down_pval_logFC <- EdgeR_sig_01_03_pval_logFC[EdgeR_sig_01_03_pval_logFC[, "hab03-hab01"] == -1,]
-length(EdgeR_sig_01_03_down_pval_logFC$`hab03-hab01`) #175
+length(EdgeR_sig_01_03_down_pval_logFC$`hab03-hab01`) #39
 #BLAST
-EdgeR_sig_01_03_down_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_01_03_down_pval_logFC,by='row.names') #104
+EdgeR_sig_01_03_down_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_01_03_down_pval_logFC,by='row.names') #25
 #order P-values 
 EdgeR_sig_01_03_down_pval_logFC_blastp_merge_order<- EdgeR_sig_01_03_down_pval_logFC_blastp_merge[order(EdgeR_sig_01_03_down_pval_logFC_blastp_merge$`myedgeR_01_03$table$PValue`, decreasing = F),]
-length(EdgeR_sig_01_03_down_pval_logFC_blastp_merge_order$Row.names)#104
+length(EdgeR_sig_01_03_down_pval_logFC_blastp_merge_order$Row.names)#25
+
+#Consensus DOWN order
+EdgeR_sig_01_03_down_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_01_03_down_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_01_03_down_pval_logFC_blastp_con_merge_order <- EdgeR_sig_01_03_down_pval_logFC_blastp_con_merge[order(EdgeR_sig_01_03_down_pval_logFC_blastp_con_merge$`myedgeR_01_03$table$PValue`, decreasing = F),]
+
 
 #up 
 EdgeR_sig_01_03_up_pval_logFC <- EdgeR_sig_01_03_pval_logFC[EdgeR_sig_01_03_pval_logFC[, "hab03-hab01"] == 1,]
-length(EdgeR_sig_01_03_up_pval_logFC$`hab03-hab01`) #63
+length(EdgeR_sig_01_03_up_pval_logFC$`hab03-hab01`) #25
 #BLAST
 EdgeR_sig_01_03_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_01_03_up_pval_logFC,by='row.names')
 #order P-values 
 EdgeR_sig_01_03_up_pval_logFC_blastp_merge_order<- EdgeR_sig_01_03_up_pval_logFC_blastp_merge[order(EdgeR_sig_01_03_up_pval_logFC_blastp_merge$`myedgeR_01_03$table$PValue`, decreasing = F),]
-length(EdgeR_sig_01_03_up_pval_logFC_blastp_merge_order$Row.names)#39
+length(EdgeR_sig_01_03_up_pval_logFC_blastp_merge_order$Row.names)#14
+
+#Consensus up order
+EdgeR_sig_01_03_up_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_01_03_up_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_01_03_up_pval_logFC_blastp_con_merge_order <- EdgeR_sig_01_03_up_pval_logFC_blastp_con_merge[order(EdgeR_sig_01_03_up_pval_logFC_blastp_con_merge$`myedgeR_01_03$table$PValue`, decreasing = F),]
+
+
+
 
 # 3 hour - 6 hours
 
 #down
 EdgeR_sig_03_06_pval_logFC
 EdgeR_sig_03_06_down_pval_logFC <- EdgeR_sig_03_06_pval_logFC[EdgeR_sig_03_06_pval_logFC[, "hab06-hab03"] == -1,]
-length(EdgeR_sig_03_06_down_pval_logFC$`hab06-hab03`) #120
+length(EdgeR_sig_03_06_down_pval_logFC$`hab06-hab03`) #115
 #BLAST
-EdgeR_sig_03_06_down_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_03_06_down_pval_logFC,by='row.names') #73
+EdgeR_sig_03_06_down_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_03_06_down_pval_logFC,by='row.names') 
 #order P-values 
 EdgeR_sig_03_06_down_pval_logFC_blastp_merge_order<- EdgeR_sig_03_06_down_pval_logFC_blastp_merge[order(EdgeR_sig_03_06_down_pval_logFC_blastp_merge$`myedgeR_03_06$table$PValue`, decreasing = F),]
-length(EdgeR_sig_03_06_down_pval_logFC_blastp_merge_order$Row.names)
+length(EdgeR_sig_03_06_down_pval_logFC_blastp_merge_order$Row.names)#70
+
+#Consensus down order
+EdgeR_sig_03_06_down_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_03_06_down_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_03_06_down_pval_logFC_blastp_con_merge_order <- EdgeR_sig_03_06_down_pval_logFC_blastp_con_merge[order(EdgeR_sig_03_06_down_pval_logFC_blastp_con_merge$`myedgeR_03_06$table$PValue`, decreasing = F),]
 
 
 #up
 EdgeR_sig_03_06_up_pval_logFC <- EdgeR_sig_03_06_pval_logFC[EdgeR_sig_03_06_pval_logFC[, "hab06-hab03"] == 1,]
-length(EdgeR_sig_03_06_up_pval_logFC$`hab06-hab03`) #127 
+length(EdgeR_sig_03_06_up_pval_logFC$`hab06-hab03`) #129 
 #BLAST 
-EdgeR_sig_03_06_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_03_06_up_pval_logFC,by='row.names') #89
+EdgeR_sig_03_06_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_03_06_up_pval_logFC,by='row.names') 
 #order P-values 
 EdgeR_sig_03_06_up_pval_logFC_blastp_merge_order<- EdgeR_sig_03_06_up_pval_logFC_blastp_merge[order(EdgeR_sig_03_06_up_pval_logFC_blastp_merge$`myedgeR_03_06$table$PValue`, decreasing = F),]
-length(EdgeR_sig_03_06_up_pval_logFC_blastp_merge_order$Row.names)
+length(EdgeR_sig_03_06_up_pval_logFC_blastp_merge_order$Row.names) #88
+
+
+#Consensus up order
+EdgeR_sig_03_06_up_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_03_06_up_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_03_06_up_pval_logFC_blastp_con_merge_order <- EdgeR_sig_03_06_up_pval_logFC_blastp_con_merge[order(EdgeR_sig_03_06_up_pval_logFC_blastp_con_merge$`myedgeR_03_06$table$PValue`, decreasing = F),]
+
 
 
 # 6 hour - 12 hours
 #down
 EdgeR_sig_06_12_pval_logFC
 EdgeR_sig_06_12_down_pval_logFC <- EdgeR_sig_06_12_pval_logFC[EdgeR_sig_06_12_pval_logFC[, "hab12-hab06"] == -1,]
-length(EdgeR_sig_06_12_down_pval_logFC$`hab12-hab06`) #1
+length(EdgeR_sig_06_12_down_pval_logFC$`hab12-hab06`) #3
 
 # BLAST 
-EdgeR_sig_06_12_down_pval_logFC_blastp_merge<- merge(HumRef2020ML_df ,EdgeR_sig_06_12_down_pval_logFC,by='row.names') #1
-length(EdgeR_sig_06_12_down_pval_logFC_blastp_merge$Row.names)
-#only 1 result, no need to order 
+EdgeR_sig_06_12_down_pval_logFC_blastp_merge<- merge(HumRef2020ML_df ,EdgeR_sig_06_12_down_pval_logFC,by='row.names')
+length(EdgeR_sig_06_12_down_pval_logFC_blastp_merge$Row.names) #2
+
+
+#Consensus down order
+EdgeR_sig_06_12_down_pval_logFC_blastp_con_merge <- merge(EdgeR_sig_06_12_down_pval_logFC_blastp_merge,con_genenames_df,by='V1')
+EdgeR_sig_06_12_down_pval_logFC_blastp_con_merge_order <- EdgeR_sig_06_12_down_pval_logFC_blastp_con_merge[order(EdgeR_sig_06_12_down_pval_logFC_blastp_con_merge$`myedgeR_06_12$table$PValue`, decreasing = F),]
+
+
 
 #up
 EdgeR_sig_06_12_up_pval_logFC <- EdgeR_sig_06_12_pval_logFC[EdgeR_sig_06_12_pval_logFC[, "hab12-hab06"] == 1,]
-length(EdgeR_sig_06_12_up_pval_logFC$`hab12-hab06`) #4
+length(EdgeR_sig_06_12_up_pval_logFC$`hab12-hab06`) #5
 #BLAST
-EdgeR_sig_06_12_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_06_12_up_pval_logFC,by='row.names') #2
+EdgeR_sig_06_12_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_06_12_up_pval_logFC,by='row.names') 
 
 #order P-values 
 EdgeR_sig_06_12_up_pval_logFC_blastp_merge_order<- EdgeR_sig_06_12_up_pval_logFC_blastp_merge[order(EdgeR_sig_06_12_up_pval_logFC_blastp_merge$`myedgeR_06_12$table$PValue`, decreasing = F),]
-length(EdgeR_sig_06_12_up_pval_logFC_blastp_merge_order$Row.names)#2
+length(EdgeR_sig_06_12_up_pval_logFC_blastp_merge_order$Row.names)#3
+
+#Consensus up order
+EdgeR_sig_06_12_up_pval_logFC_blastp_con_merge  <- merge(EdgeR_sig_06_12_up_pval_logFC_blastp_merge ,con_genenames_df,by='V1')
+EdgeR_sig_06_12_up_pval_logFC_blastp_con_merge_order <- EdgeR_sig_06_12_up_pval_logFC_blastp_con_merge[order(EdgeR_sig_06_12_up_pval_logFC_blastp_con_merge$`myedgeR_06_12$table$PValue`, decreasing = F),]
+
+
+
+
 
 # 12 hour - 24 hour -- no sig changes! 
 
@@ -475,17 +516,34 @@ length(EdgeR_sig_06_12_up_pval_logFC_blastp_merge_order$Row.names)#2
 #down
 EdgeR_sig_24_48_pval_logFC
 EdgeR_sig_24_48_down_pval_logFC <- EdgeR_sig_24_48_pval_logFC[EdgeR_sig_24_48_pval_logFC[, "hab48-hab24"] == -1,]
-length(EdgeR_sig_24_48_down_pval_logFC$`hab48-hab24`) #1
+length(EdgeR_sig_24_48_down_pval_logFC$`hab48-hab24`) #2
 #BLAST
-EdgeR_sig_24_48_down_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_24_48_down_pval_logFC,by='row.names')
-#0
-#no blast 
+EdgeR_sig_24_48_down_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_24_48_down_pval_logFC,by='row.names')#1
+
+#Consensus down order
+EdgeR_sig_24_48_down_pval_logFC_blastp_con_merge  <- merge(EdgeR_sig_24_48_down_pval_logFC_blastp_merge ,con_genenames_df,by='V1')
+EdgeR_sig_24_48_down_pval_logFC_blastp_con_merge_order <- EdgeR_sig_24_48_down_pval_logFC_blastp_con_merge[order(EdgeR_sig_24_48_down_pval_logFC_blastp_con_merge$`myedgeR_24_48$table$PValue`, decreasing = F),]
+
+
+
 #up
 EdgeR_sig_24_48_up_pval_logFC <- EdgeR_sig_24_48_pval_logFC[EdgeR_sig_24_48_pval_logFC[, "hab48-hab24"] == 1,]
-length(EdgeR_sig_24_48_up_pval_logFC$`hab48-hab24`) #2
+length(EdgeR_sig_24_48_up_pval_logFC$`hab48-hab24`) #7
 #BLAST
 EdgeR_sig_24_48_up_pval_logFC_blastp_merge <- merge(HumRef2020ML_df ,EdgeR_sig_24_48_up_pval_logFC,by='row.names')
-length(EdgeR_sig_24_48_up_pval_logFC_blastp_merge$Row.names)#0
+length(EdgeR_sig_24_48_up_pval_logFC_blastp_merge$Row.names)#3
+
+#order P-values 
+EdgeR_sig_24_48_up_pval_logFC_blastp_merge_order<- EdgeR_sig_24_48_up_pval_logFC_blastp_merge[order(EdgeR_sig_24_48_up_pval_logFC_blastp_merge$`myedgeR_24_48$table$PValue`, decreasing = F),]
+
+#Consensus up order
+EdgeR_sig_24_48_up_pval_logFC_blastp_con_merge  <- merge(EdgeR_sig_24_48_up_pval_logFC_blastp_merge ,con_genenames_df,by='V1')
+EdgeR_sig_24_48_up_pval_logFC_blastp_con_merge_order <- EdgeR_sig_24_48_up_pval_logFC_blastp_con_merge[order(EdgeR_sig_24_48_up_pval_logFC_blastp_con_merge$`myedgeR_24_48$table$PValue`, decreasing = F),]
+
+
+
+
+
 #Merge all of the sig genes in each interval with their corresponding p-values and LogFC into a list 
 EdgeR_sig_pval_logFC <- list(sig_U_00_up = EdgeR_sig_U_00_up_pval_logFC_blastp_merge_order,
                              sig_00_01_down= EdgeR_sig_00_01_down_pval_logFC_blastp_merge_order,
@@ -495,5 +553,44 @@ EdgeR_sig_pval_logFC <- list(sig_U_00_up = EdgeR_sig_U_00_up_pval_logFC_blastp_m
                              sig_03_06_down = EdgeR_sig_03_06_down_pval_logFC_blastp_merge_order,
                              sig_03_06_up = EdgeR_sig_03_06_up_pval_logFC_blastp_merge_order,
                              sig_06_12_down = EdgeR_sig_06_12_down_pval_logFC_blastp_merge,
-                             sig_06_12_up = EdgeR_sig_06_12_up_pval_logFC_blastp_merge_order )
-capture.output(EdgeR_sig_pval_logFC, file = "EdgeR_sig_pval_logFC_V3.tsv")
+                             sig_06_12_up = EdgeR_sig_06_12_up_pval_logFC_blastp_merge_order,
+                             sig_24_48_down = EdgeR_sig_24_48_down_pval_logFC_blastp_merge,
+                             sig_24_48_up = EdgeR_sig_24_48_up_pval_logFC_blastp_merge_order)
+options(max.print=999999)
+capture.output(EdgeR_sig_pval_logFC, file = "EdgeR_sig_pval_logFC_v4.csv")
+
+
+#Merge all of the sig genes in each interval that are also found in the consensus with their corresponding p-values and LogFC into a list 
+EdgeR_sig_pval_logFC_consensus <- list(sig_U_00_up = EdgeR_sig_U_00_up_pval_logFC_blastp_con_merge_order,
+                             sig_00_01_down= EdgeR_sig_00_01_down_pval_logFC_blastp_con_merge_order,
+                             sig_00_01_up= EdgeR_sig_00_01_up_pval_logFC_blastp_con_merge_order,
+                             sig_01_03_down = EdgeR_sig_01_03_down_pval_logFC_blastp_con_merge_order,
+                             sig_01_03_up = EdgeR_sig_01_03_up_pval_logFC_blastp_con_merge_order,
+                             sig_03_06_down = EdgeR_sig_03_06_down_pval_logFC_blastp_con_merge_order,
+                             sig_03_06_up = EdgeR_sig_03_06_up_pval_logFC_blastp_con_merge_order,
+                             sig_06_12_down = EdgeR_sig_06_12_down_pval_logFC_blastp_con_merge_order,
+                             sig_06_12_up = EdgeR_sig_06_12_up_pval_logFC_blastp_con_merge_order,
+                             sig_24_48_down = EdgeR_sig_24_48_down_pval_logFC_blastp_con_merge_order,
+                             sig_24_48_up = EdgeR_sig_24_48_up_pval_logFC_blastp_con_merge_order)
+options(max.print=999999)
+capture.output(EdgeR_sig_pval_logFC_consensus, file = "EdgeR_sig_pval_logFC_consensus_v4.csv")
+
+
+
+
+
+# Getting a dataframe of # of DEG(with or without BLAST) for each time interval 
+EdgeR_sig_numbers <- data.frame(sig_U_00_up = length(EdgeR_sig_U_00_up_pval_logFC$`hab00-000`),
+                                sig_U_00_down = length(EdgeR_sig_U_00_down_pval_logFC$`uncut-hab00`),
+                                sig_00_01_up= length(EdgeR_sig_00_01_up_pval_logFC$`hab01-hab00`),
+                                sig_00_01_down= length(EdgeR_sig_00_01_down_pval_logFC$`hab01-hab00`),
+                                sig_01_03_up = length(EdgeR_sig_01_03_up_pval_logFC$`hab03-hab01`),
+                                sig_01_03_down = length(EdgeR_sig_01_03_down_pval_logFC$`hab03-hab01`),
+                                sig_03_06_up = length(EdgeR_sig_03_06_up_pval_logFC$`hab06-hab03`),
+                                sig_03_06_down = length(EdgeR_sig_03_06_down_pval_logFC$`hab06-hab03`),
+                                sig_06_12_up = length(EdgeR_sig_06_12_up_pval_logFC$`hab12-hab06`),
+                                sig_06_12_down = length(EdgeR_sig_06_12_down_pval_logFC$`hab12-hab06`),
+                                sig_24_48_up = length(EdgeR_sig_24_48_up_pval_logFC$`hab48-hab24`),
+                                sig_24_48_down = length(EdgeR_sig_24_48_down_pval_logFC$`hab48-hab24`)
+                                 )
+
